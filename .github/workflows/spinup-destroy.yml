@@ -30,6 +30,7 @@ jobs:
       - name: Create Azure resource group
         if: success()
         run: |
+          echo "building resource group"
           az group create --location ${{env.AZURE_LOCATION}} --name ${{env.AZURE_RESOURCE_GROUP}} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
 
       - name: Create Azure app service plan
@@ -64,4 +65,5 @@ jobs:
       - name: Destroy Azure environment
         if: success()
         run: |
+          echo "destroying environment..."
           az group delete --name ${{env.AZURE_RESOURCE_GROUP}} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}} --yes
